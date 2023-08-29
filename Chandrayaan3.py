@@ -104,11 +104,11 @@ def movements(chandrayaan3_obj, commands):
      
 
 # Passing commands through list C
-C = ["b","l","u","r","d","f"]
+C = ["f","r","u","b","l"]
 
 # Declaring initial values
-initial_position = (3, -2, 1)
-initial_direction = "E"
+initial_position = (0, 0, 0)
+initial_direction = "N"
 
 # Creating object of class Chandrayaan3
 chandrayaan3_obj = Chandrayaan3(initial_position[0],initial_position[1],initial_position[2], initial_direction)
