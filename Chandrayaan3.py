@@ -8,6 +8,7 @@ class Chandrayaan3:
         self.z = z
         self.initial_direction = initial_direction
         self.temporary_direction = "N"
+
     # Method for moving forward and backward in various directions
 
     # Method for moving forward
@@ -19,8 +20,12 @@ class Chandrayaan3:
         elif self.initial_direction == "E":
             self.x += 1
         elif self.initial_direction == "W":
-            self.x -= 1    
-    
+            self.x -= 1
+        elif self.initial_direction == "D":
+            self.z -= 1
+        elif self.initial_direction == "U":
+            self.z += 1 
+
     # Method for moving backward
     def backward_movement(self):
         if self.initial_direction == "N":
@@ -31,30 +36,11 @@ class Chandrayaan3:
             self.x -= 1
         elif self.initial_direction == "W":
             self.x += 1
-    # Methods for rotationg spacecraft left and right
+        elif self.initial_direction == "U":
+            self.z -= 1 
+        elif self.initial_direction == "D":
+            self.z += 1
 
-    # Method for rotating left
-    def rotate_left(self):
-        if self.initial_direction == "N":
-            self.initial_direction = "W"
-        elif self.initial_direction == "S":
-            self.initial_direction = "E"
-        elif self.initial_direction == "E":
-            self.initial_direction = "N"
-        elif self.initial_direction == "W":
-            self.initial_direction = "S"
-
-    # Method for rotating right
-    def rotate_right(self):
-        if self.initial_direction == "N":
-            self.initial_direction = "E"
-        elif self.initial_direction == "S":
-            self.initial_direction = "W"
-        elif self.initial_direction == "E":
-            self.initial_direction = "S"
-        elif self.initial_direction == "W":
-            self.initial_direction = "N"
-    
     # Method for moving upward and downward
 
     # Method for changing direction to up
@@ -67,7 +53,38 @@ class Chandrayaan3:
     def downward_movement(self):
         if self.initial_direction != "D":
             self.temporary_direction = self.initial_direction
-            self.initial_direction = "D"  
+            self.initial_direction = "D"        
+    
+    # Methods for rotationg spacecraft left and right
+
+    # Method for rotating left
+    def rotate_left(self):
+        if self.initial_direction == "N":
+            self.initial_direction = "W"
+        elif self.initial_direction == "S":
+            self.initial_direction = "E"
+        elif self.initial_direction == "E":
+            self.initial_direction = "N"
+        elif self.initial_direction == "W":
+            self.initial_direction = "S"
+        elif self.initial_direction == "U" or "D":
+            self.initial_direction = self.temporary_direction
+            chandrayaan3_obj.rotate_left()
+   
+    # Method for rotating right
+    def rotate_right(self):
+        if self.initial_direction == "N":
+            self.initial_direction = "E"
+        elif self.initial_direction == "S":
+            self.initial_direction = "W"
+        elif self.initial_direction == "E":
+            self.initial_direction = "S"
+        elif self.initial_direction == "W":
+            self.initial_direction = "N"
+        elif self.initial_direction == "U" or "D":
+            self.initial_direction = self.temporary_direction
+            chandrayaan3_obj.rotate_right()
+
 
 # Function for passing commands to operate spacecraft
 def movements(chandrayaan3_obj, commands):
@@ -87,11 +104,17 @@ def movements(chandrayaan3_obj, commands):
      
 
 # Passing commands through list C
-C = ["f","l","b"]
+C = ["f","r","u","b","l"]
+
+# Declaring initial values
 initial_position = (0, 0, 0)
 initial_direction = "N"
+
+# Creating object of class Chandrayaan3
 chandrayaan3_obj = Chandrayaan3(initial_position[0],initial_position[1],initial_position[2], initial_direction)
- 
+
 movements(chandrayaan3_obj, C)
+
+# Printing output with the final values
 print("Final Position -", (chandrayaan3_obj.x, chandrayaan3_obj.y, chandrayaan3_obj.z))
 print("Final Direction -", chandrayaan3_obj.initial_direction)
