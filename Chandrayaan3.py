@@ -7,7 +7,7 @@ class Chandrayaan3:
         self.y = y
         self.z = z
         self.initial_direction = initial_direction
-    
+        self.temporary_direction = "N"
     # Method for moving forward and backward in various directions
 
     # Method for moving forward
@@ -55,6 +55,20 @@ class Chandrayaan3:
         elif self.initial_direction == "W":
             self.initial_direction = "N"
     
+    # Method for moving upward and downward
+
+    # Method for changing direction to up
+    def upward_movement(self):
+        if self.initial_direction != "U":
+            self.temporary_direction = self.initial_direction
+            self.initial_direction = "U"
+       
+    # Method for changing direction to down
+    def downward_movement(self):
+        if self.initial_direction != "D":
+            self.temporary_direction = self.initial_direction
+            self.initial_direction = "D"  
+
 # Function for passing commands to operate spacecraft
 def movements(chandrayaan3_obj, commands):
     for i in commands:
@@ -66,7 +80,11 @@ def movements(chandrayaan3_obj, commands):
             chandrayaan3_obj.rotate_left()
         elif i == "r":
             chandrayaan3_obj.rotate_right()
-
+        elif i == "u":
+            chandrayaan3_obj.upward_movement()
+        elif i == "d":
+            chandrayaan3_obj.downward_movement()
+     
 
 # Passing commands through list C
 C = ["f","l","b"]
